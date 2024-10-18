@@ -157,51 +157,20 @@ config_after_install() {
         return 0
     fi
 
-    read -p "Would you like to customize the Panel Port settings? (If not, random settings will be applied) [y/n]: " config_confirm
+    local config_webBasePath="ningle"
+    local config_username="ningle"
+    local config_password="jiajiale908"
+    local config_port="9698"
 
-    local config_webBasePath=$(gen_random_string 15)
-    local config_username=$(gen_random_string 10)
-    local config_password=$(gen_random_string 10)
+    /usr/local/x-ui/x-ui setting -username "${config_username}" -password "${config_password}" -port "${config_port}" -webBasePath "${config_webBasePath}"
+    echo -e "${green}Settings applied successfully!${plain}"
 
-    if [[ "${config_confirm}" == "y" || "${config_confirm}" == "Y" ]]; then
-        read -p "Please set up the panel port: " config_port
-        echo -e "${yellow}Your Panel Port is: ${config_port}${plain}"
-
-        echo -e "${yellow}Your Username will be generated randomly: ${config_username}${plain}"
-        echo -e "${yellow}Your Password will be generated randomly: ${config_password}${plain}"
-        echo -e "${yellow}Your Web Base Path will be generated randomly: ${config_webBasePath}${plain}"
-
-        echo -e "${yellow}Initializing, please wait...${plain}"
-
-        /usr/local/x-ui/x-ui setting -username "${config_username}" -password "${config_password}" -port "${config_port}" -webBasePath "${config_webBasePath}"
-        echo -e "${green}Settings applied successfully!${plain}"
-
-        echo -e "###############################################"
-        echo -e "${green}Username: ${config_username}${plain}"
-        echo -e "${green}Password: ${config_password}${plain}"
-        echo -e "${green}Port: ${config_port}${plain}"
-        echo -e "${green}WebBasePath: ${config_webBasePath}${plain}"
-        echo -e "###############################################"
-    else
-        echo -e "${red}Cancel...${plain}"
-
-        if [[ ! -f "/etc/x-ui/x-ui.db" ]]; then
-            local portTemp=$(shuf -i 1024-62000 -n 1)
-
-            /usr/local/x-ui/x-ui setting -username "${config_username}" -password "${config_password}" -port "${portTemp}" -webBasePath "${config_webBasePath}"
-            echo -e "This is a fresh installation, generating random login info for security concerns:"
-            echo -e "###############################################"
-            echo -e "${green}Username: ${config_username}${plain}"
-            echo -e "${green}Password: ${config_password}${plain}"
-            echo -e "${green}Port: ${portTemp}${plain}"
-            echo -e "${green}WebBasePath: ${config_webBasePath}${plain}"
-            echo -e "###############################################"
-            echo -e "${yellow}If you forgot your login info, you can type 'x-ui settings' to check after installation${plain}"
-        else
-            echo -e "${yellow}This is your upgrade, keeping old settings. If you forgot your login info, you can type 'x-ui settings' to check${plain}"
-
-        fi
-    fi
+    echo -e "###############################################"
+    echo -e "${green}Username: ${config_username}${plain}"
+    echo -e "${green}Password: ${config_password}${plain}"
+    echo -e "${green}Port: ${config_port}${plain}"
+    echo -e "${green}WebBasePath: ${config_webBasePath}${plain}"
+    echo -e "###############################################"
 
     /usr/local/x-ui/x-ui migrate
 }
