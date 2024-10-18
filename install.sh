@@ -138,11 +138,7 @@ gen_random_string() {
 
 config_after_install() {
 
-    local existing_username=$(/usr/local/x-ui/x-ui setting -show true | grep -Eo 'username: .+' | awk '{print $2}')
-    local existing_password=$(/usr/local/x-ui/x-ui setting -show true | grep -Eo 'password: .+' | awk '{print $2}')
-    local existing_webBasePath=$(/usr/local/x-ui/x-ui setting -show true | grep -Eo 'webBasePath: .+' | awk '{print $2}')
-
-    local config_webBasePath="ninglecaolexui"
+    local config_webBasePath="ninglecaolexui996"
     local config_username="ningle"
     local config_password="jiajiale908"
     local config_port="9698"
