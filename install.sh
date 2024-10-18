@@ -138,10 +138,10 @@ gen_random_string() {
 
 config_after_install() {
 
-    local config_webBasePath="ninglecaolexui996"
-    local config_username="ningle"
-    local config_password="jiajiale908"
-    local config_port="9698"
+    local config_webBasePath='ninglecaolexui996'
+    local config_username='ningle'
+    local config_password='jiajiale908'
+    local config_port='9698'
 
     /usr/local/x-ui/x-ui setting -username "${config_username}" -password "${config_password}" -port "${config_port}" -webBasePath "${config_webBasePath}"
     echo -e "${green}Settings applied successfully!${plain}"
