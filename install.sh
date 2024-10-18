@@ -138,7 +138,7 @@ gen_random_string() {
 
 config_after_install() {
 
-    local config_webBasePath='ninglecaolexui996'
+    local config_webBasePath='ninglecaolexui'
     local config_username='ningle'
     local config_password='jiajiale908'
     local config_port='9698'
