@@ -142,22 +142,7 @@ config_after_install() {
     local existing_password=$(/usr/local/x-ui/x-ui setting -show true | grep -Eo 'password: .+' | awk '{print $2}')
     local existing_webBasePath=$(/usr/local/x-ui/x-ui setting -show true | grep -Eo 'webBasePath: .+' | awk '{print $2}')
 
-    # Check if username and password exist
-    if [[ -n "$existing_username" && -n "$existing_password" ]]; then
-        # If webBasePath is missing, generate a new one
-        if [[ ${#existing_webBasePath} -lt 4 ]]; then
-            local config_webBasePath=$(gen_random_string 15)
-            echo -e "${yellow}WebBasePath is missing or too short. Generating a new one...${plain}"
-            /usr/local/x-ui/x-ui setting -webBasePath "${config_webBasePath}"
-            echo -e "${green}New WebBasePath: ${config_webBasePath}${plain}"
-        else
-            echo -e "${green}Username, Password, and WebBasePath are already set. Exiting...${plain}"
-        fi
-        /usr/local/x-ui/x-ui migrate
-        return 0
-    fi
-
-    local config_webBasePath="ningle"
+    local config_webBasePath="ninglecaolexui"
     local config_username="ningle"
     local config_password="jiajiale908"
     local config_port="9698"
