@@ -1039,23 +1039,23 @@ ssl_cert_issue() {
     fi
 
     # Prompt user to set panel paths after successful certificate installation
-    read -p "Would you like to set this certificate for the panel? (y/n): " setPanel
-    if [[ "$setPanel" == "y" || "$setPanel" == "Y" ]]; then
-        local webCertFile="/root/cert/${domain}/fullchain.pem"
-        local webKeyFile="/root/cert/${domain}/privkey.pem"
+    # read -p "Would you like to set this certificate for the panel? (y/n): " setPanel
+    # if [[ "$setPanel" == "y" || "$setPanel" == "Y" ]]; then
+    local webCertFile="/root/cert/${domain}/fullchain.pem"
+    local webKeyFile="/root/cert/${domain}/privkey.pem"
 
-        if [[ -f "$webCertFile" && -f "$webKeyFile" ]]; then
-            /usr/local/x-ui/x-ui cert -webCert "$webCertFile" -webCertKey "$webKeyFile"
-            LOGI "Panel paths set for domain: $domain"
-            LOGI "  - Certificate File: $webCertFile"
-            LOGI "  - Private Key File: $webKeyFile"
-            restart
-        else
-            LOGE "Error: Certificate or private key file not found for domain: $domain."
-        fi
+    if [[ -f "$webCertFile" && -f "$webKeyFile" ]]; then
+        /usr/local/x-ui/x-ui cert -webCert "$webCertFile" -webCertKey "$webKeyFile"
+        LOGI "Panel paths set for domain: $domain"
+        LOGI "  - Certificate File: $webCertFile"
+        LOGI "  - Private Key File: $webKeyFile"
+        restart
     else
-        LOGI "Skipping panel path setting."
+        LOGE "Error: Certificate or private key file not found for domain: $domain."
     fi
+    # else
+    #     LOGI "Skipping panel path setting."
+    # fi
 }
 
 ssl_cert_issue_CF() {
